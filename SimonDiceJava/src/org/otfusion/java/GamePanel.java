@@ -1,17 +1,9 @@
 package org.otfusion.java;
 
-import java.awt.Color;
+
 import java.awt.Dimension;
-import java.awt.Event;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Point;
-import java.awt.Rectangle;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import javax.swing.JPanel;
 
 /**
@@ -42,6 +34,8 @@ public class GamePanel extends JPanel {
         g2.fill(Constants.REDRECT);
         g2.setPaint(Constants.GREEN);
         g2.fill(Constants.GREENRECT);
+        g2.setPaint(Constants.WHITE);
+        g2.drawString("Press the button or Q,W,A,S", 10, 15);
     }
 
     @Override

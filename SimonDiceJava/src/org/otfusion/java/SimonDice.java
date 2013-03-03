@@ -36,9 +36,5 @@ public class SimonDice {
         game.getFrame().pack();
         game.getFrame().setVisible(true);
         System.out.println(String.format("Event Dispatch Thread: [%s]", value));
-        
-        boolean waitForInput = false;
-        while(!waitForInput) {
-        }
     }
 }
