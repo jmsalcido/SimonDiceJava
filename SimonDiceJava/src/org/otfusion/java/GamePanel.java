@@ -12,14 +12,8 @@ import javax.swing.JPanel;
  */
 public class GamePanel extends JPanel {
     
-    private Game mGame;
-    
     public GamePanel() {
         setBackground(Constants.bgColor);
-        this.mGame = Game.getInstance();
-        addMouseListener(mGame.createMouseAdapter());
-        addKeyListener(mGame.createKeyAdapter());
-        
     }
 
     @Override
@@ -36,6 +30,8 @@ public class GamePanel extends JPanel {
         g2.fill(Constants.GREENRECT);
         g2.setPaint(Constants.WHITE);
         g2.drawString("Press the button or Q,W,A,S", 10, 15);
+        g2.drawString(String.format("SCORE: %d", Game.getInstance().getScore()),
+                Constants.WINDOW_WIDTH - 100, 15);
     }
 
     @Override

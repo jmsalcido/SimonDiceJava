@@ -19,6 +19,7 @@ public class Constants {
     public static final int BUTTON_SIZE = 200;
     public static final int BUTTON_GAP_SIZE = 20;
     public static final int TIMEOUT_SECS = 4;
+    public static final int INIT_SECONDS = 5;
     
     // ========================================
     // GAME BUTTONS

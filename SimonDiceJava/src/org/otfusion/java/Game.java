@@ -13,6 +13,9 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import static org.otfusion.java.SimonDice.GAME_NAME;
 
 /**
@@ -29,7 +32,6 @@ public class Game {
     private int mScore;
     
     private Game() {
-        mPattern = new LinkedList<>();
         mScore = 0;
     }
     
@@ -53,11 +55,25 @@ public class Game {
         }
     }
     
+    public void waitSeconds(int seconds) {
+        TimerWorker timer = new TimerWorker(seconds);
+        timer.execute();
+    }
+    
+    public void init() {
+        mGamePanel.repaint();
+        mGamePanel.addMouseListener(mGame.createMouseAdapter());
+        mGamePanel.addKeyListener(mGame.createKeyAdapter());
+        mPattern = new LinkedList<>();
+        mScore = 0;
+    }
+    
     public MouseAdapter createMouseAdapter() {
         return new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
                 mColorButton = getButtonClicked(e.getX(), e.getY());
+                isCorrect(mColorButton);
             }
         };
     }
@@ -78,9 +94,19 @@ public class Game {
                 } else if(e.getKeyCode() == KeyEvent.VK_S ) {
                     System.out.println("GREEN");
                     mColorButton = Constants.GREEN;
+                } else if(e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+                    System.exit(0);
                 }
+                isCorrect(mColorButton);
             }
         };
+    }
+    
+    private void isCorrect(Color color) {
+        if(color == Constants.YELLOW) {
+            mScore++;
+            mGamePanel.repaint();
+        }
     }
     
     public Color getButtonClicked(int x, int y) {
@@ -116,6 +142,14 @@ public class Game {
     
     public GamePanel getGamePanel() {
         return this.mGamePanel;
+    }
+    
+    public int getScore() {
+        return this.mScore;
+    }
+    
+    public void setScore(int score) {
+        this.mScore = score;
     }
     
 }

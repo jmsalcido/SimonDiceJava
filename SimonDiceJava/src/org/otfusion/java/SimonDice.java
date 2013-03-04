@@ -35,6 +35,7 @@ public class SimonDice {
         game.getGamePanel().requestFocusInWindow();
         game.getFrame().pack();
         game.getFrame().setVisible(true);
-        System.out.println(String.format("Event Dispatch Thread: [%s]", value));
+        game.waitSeconds(Constants.INIT_SECONDS);
+        System.out.println(String.format("[%s]: Event Dispatch Thread: [%s]", GAME_NAME.toUpperCase(), value));
     }
 }
