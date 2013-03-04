@@ -6,7 +6,6 @@ package org.otfusion.java;
 
 import java.awt.Color;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 
 /**
