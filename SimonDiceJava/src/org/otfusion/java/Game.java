@@ -69,7 +69,7 @@ public class Game {
             @Override
             public void mousePressed(MouseEvent e) {
                 Color button = getButtonClicked(e.getX(), e.getY());
-                isCorrect(button);
+                verifyAndScore(button);
             }
         };
     }
@@ -94,12 +94,12 @@ public class Game {
                 } else if(e.getKeyCode() == KeyEvent.VK_ESCAPE) {
                     System.exit(0);
                 }
-                isCorrect(button);
+                verifyAndScore(button);
             }
         };
     }
     
-    private void isCorrect(Color color) {
+    private void verifyAndScore(Color color) {
         if(color == null) {
             return;
         } else {
@@ -107,8 +107,15 @@ public class Game {
         }
         if(mPattern.poll() == color){
             mScore++;
+            if(mScore == Constants.WIN_POINS) {
+                doWinAnimation();
+            }
             mGamePanel.repaint();
         }
+    }
+    
+    private void doWinAnimation() {
+        
     }
     
     public Color getButtonClicked(int x, int y) {
