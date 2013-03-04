@@ -18,8 +18,13 @@ public class Constants {
     public static final int FLASH_SPEED = 500;
     public static final int BUTTON_SIZE = 200;
     public static final int BUTTON_GAP_SIZE = 20;
+    
+    // ========================================
+    // GAME SETTINGS
+    // ========================================
     public static final int TIMEOUT_SECS = 4;
     public static final int INIT_SECONDS = 5;
+    public static final int WIN_POINS = 100;
     
     // ========================================
     // GAME BUTTONS

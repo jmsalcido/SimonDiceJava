@@ -6,15 +6,12 @@ package org.otfusion.java;
 
 import java.awt.Color;
 import java.awt.Point;
-import java.awt.Rectangle;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.LinkedList;
 import java.util.Queue;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import static org.otfusion.java.SimonDice.GAME_NAME;
 
@@ -27,8 +24,7 @@ public class Game {
     private static Game mGame;
     private GameFrame mFrame;
     private GamePanel mGamePanel;
-    private Color mColorButton;
-    private Queue<Rectangle> mPattern;
+    private Queue<Color> mPattern;
     private int mScore;
     
     private Game() {
@@ -55,7 +51,7 @@ public class Game {
         }
     }
     
-    public void waitSeconds(int seconds) {
+    public void initInSeconds(int seconds) {
         TimerWorker timer = new TimerWorker(seconds);
         timer.execute();
     }
@@ -72,8 +68,8 @@ public class Game {
         return new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                mColorButton = getButtonClicked(e.getX(), e.getY());
-                isCorrect(mColorButton);
+                Color button = getButtonClicked(e.getX(), e.getY());
+                isCorrect(button);
             }
         };
     }
@@ -82,28 +78,34 @@ public class Game {
         return new KeyAdapter() {
             @Override
             public void keyReleased(KeyEvent e) {
+                Color button = null;
                 if (e.getKeyCode() == KeyEvent.VK_Q ) {
                     System.out.println("YELLOW");
-                    mColorButton = Constants.YELLOW;
+                    button = Constants.YELLOW;
                 } else if(e.getKeyCode() == KeyEvent.VK_W ) {
                     System.out.println("BLUE");
-                    mColorButton = Constants.BLUE;
+                    button = Constants.BLUE;
                 } else if(e.getKeyCode() == KeyEvent.VK_A ) {
                     System.out.println("RED");
-                    mColorButton = Constants.RED;
+                    button = Constants.RED;
                 } else if(e.getKeyCode() == KeyEvent.VK_S ) {
                     System.out.println("GREEN");
-                    mColorButton = Constants.GREEN;
+                    button = Constants.GREEN;
                 } else if(e.getKeyCode() == KeyEvent.VK_ESCAPE) {
                     System.exit(0);
                 }
-                isCorrect(mColorButton);
+                isCorrect(button);
             }
         };
     }
     
     private void isCorrect(Color color) {
-        if(color == Constants.YELLOW) {
+        if(color == null) {
+            return;
+        } else {
+            // Continue
+        }
+        if(mPattern.poll() == color){
             mScore++;
             mGamePanel.repaint();
         }
