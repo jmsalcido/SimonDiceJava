@@ -27,6 +27,15 @@ public class Constants {
     public static final int WIN_POINTS = 100;
     
     // ========================================
+    // GAME SOUNDS
+    // ========================================
+    
+    public static final String BEEP1_FILE = "/org/otfusion/java/resources/beep1.ogg";
+    public static final String BEEP2_FILE = "/org/otfusion/java/resources/beep2.ogg";
+    public static final String BEEP3_FILE = "/org/otfusion/java/resources/beep3.ogg";
+    public static final String BEEP4_FILE = "/org/otfusion/java/resources/beep4.ogg";
+    
+    // ========================================
     // GAME BUTTONS
     // ========================================
     public static final int XMARGIN = (WINDOW_WIDTH - (2 * BUTTON_SIZE) - BUTTON_GAP_SIZE)/2;
