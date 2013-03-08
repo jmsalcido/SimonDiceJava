@@ -11,7 +11,12 @@
     <description>Builds, tests, and runs the project SimonDiceJava.</description>
     <import file="nbproject/build-impl.xml"/>
     <!--
-
+<target name="-post-jar">
+      <mkdir dir="${dist.dir}/resources"/>
+      <copy todir="${dist.dir}/resources">
+          <fileset dir="${basedir}/resources"/>
+      </copy>
+    </target>
     There exist several targets which are by default empty and which can be 
     used for execution of your tasks. These targets are usually executed 
     before and after some main targets. They are: 

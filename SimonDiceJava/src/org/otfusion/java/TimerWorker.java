@@ -18,21 +18,34 @@ public class TimerWorker extends SwingWorker<Object, Object> {
     private JLabel mLabel;
     
     public TimerWorker(int seconds) {
-        this.mSeconds = seconds;
+        // Add extra second to wait second more.
+        this.mSeconds = seconds+1;
     }
     
     @Override
     protected Object doInBackground() throws Exception {
         Game game = Game.getInstance();
-        mLabel = new JLabel("" + mSeconds);
+        // Remove one second
+        int seconds = mSeconds - 1;
+        
+        // set the label
+        mLabel = new JLabel("" + seconds);
         mLabel.setForeground(Color.RED);
+        
+        // add the label
         game.getGamePanel().add(mLabel);
+        
+        // iterate tru the i
         int i = 0;
         do {
+            // sleep the timer thread
             Thread.sleep(1000);
-            mLabel.setText("" + (mSeconds - i));
+            
+            // set the text label
+            mLabel.setText("" + (seconds - i));
             i += 1;
         } while(i < mSeconds);
+        // mSeconds because we are using the real time here.
         return null;
     }
 

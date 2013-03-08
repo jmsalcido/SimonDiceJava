@@ -24,7 +24,7 @@ public class Constants {
     // ========================================
     public static final int TIMEOUT_SECS = 4;
     public static final int INIT_SECONDS = 5;
-    public static final int WIN_POINS = 100;
+    public static final int WIN_POINTS = 100;
     
     // ========================================
     // GAME BUTTONS
