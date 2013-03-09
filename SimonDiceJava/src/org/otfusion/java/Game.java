@@ -30,6 +30,7 @@ public class Game {
     private GameFrame mFrame;
     private GamePanel mGamePanel;
     private Queue<Color> mPattern;
+    private Queue<Color> mPattern_temp;
     private int mScore;
     private Music mMusic;
     
@@ -68,6 +69,7 @@ public class Game {
         mGamePanel.addMouseListener(mGame.createMouseAdapter());
         mGamePanel.addKeyListener(mGame.createKeyAdapter());
         mPattern = new LinkedList<>();
+        mPattern_temp = new LinkedList<>();
         //mPattern.add(Constants.YELLOW);
         mScore = 0;
         addRandomColor();
@@ -143,7 +145,6 @@ public class Game {
     }
     
     private void verifyAndScore(Color color) {
-        Queue<Color> temp = new LinkedList<>();
         if(color == null) {
             return;
         } else {
@@ -151,17 +152,16 @@ public class Game {
         }
         
         Color value = mPattern.poll();
-        temp.add(value);
         if(value == color) {
             // Nothing :^)
         } else {
             System.exit(0);
         }
         
-        value = mPattern.peek();
-        if(value == null) {
+        int size = mPattern.size();
+        if(size == 0) {
             mScore++;
-            mPattern = temp;
+            mPattern = copyQueue(mPattern_temp);
             try { Thread.sleep(500); } catch (Exception ex) {}
             addRandomColor();
             playPattern();
@@ -173,11 +173,23 @@ public class Game {
         }
     }
     
+    private Queue<Color> copyQueue(Queue<Color> object) {
+        Queue<Color> queue = new LinkedList<>();
+        for(Object o : object.toArray()) {
+            Color color = (Color) o;
+            queue.add(color);
+        }
+        if(queue.size() == 0) {
+            queue = null;
+        }
+        return queue;
+    }
+    
     private void addRandomColor() {
         int randomNumber = (int)(Math.random() * 5);
         if(randomNumber >= 4) {
-            randomNumber = 3;
-        }
+            randomNumber = 3; 
+       }
         Color array[] = new Color[] {
             Constants.YELLOW,
             Constants.BLUE,
@@ -185,6 +197,7 @@ public class Game {
             Constants.GREEN
         };
         mPattern.add(array[randomNumber]);
+        mPattern_temp.add(array[randomNumber]);
     }
     
     private void playPattern() {
